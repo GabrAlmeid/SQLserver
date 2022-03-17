@@ -117,6 +117,11 @@ GROUP BY ProductID
 
 -- having é usado com group by para filtrar resultados de um agrupamento
 
+select firstname, count(firstname) as "quantidade"
+from person.person
+group by firstname
+having count(firstname) > 10
+
 
 
 
