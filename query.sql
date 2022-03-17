@@ -220,6 +220,108 @@ FROM Sales.SalesOrderDetail
 SELECT UnitPrice * LineTotal
 FROM Sales.SalesOrderDetail
 
+-- Subquery ou Subselect
+
+SELECT FirstName
+FROM Person.person
+WHERE BusinessEntityID in (
+SELECT BusinessEntityID FROM HumanResources.Employee
+WHERE JobTitle = 'Design Engineer'
+)
+
+-- Self-join
+
+SELECT A.ContactName, A.region, B.ContactName, B.region
+FROM Customers a, Customers b
+WHERE A.region = B.region
+
+SELECT A.firstname, A.hiredate, B.firstname, B.hiredate
+FROM Employees A, Employees B
+WHERE DATEPART(Year, a.hiredate) = DATEPART (Year, b.hiredate)
+
+-- Create Table
+
+CREATE TABLE nomeDaTabela (
+    coluna1 tipo restricaoDaColuna
+    coluna2 tipo 
+    coluna3 tipo restricaoDaColuna
+)
+
+principais restriçoes:
+NOT NULL - não permite nulos
+UNIQUE - força que todos valores da coluna sejam diferentes
+PRIMARY KEY - junção de NOT NULL e UNIQUE
+FOREIGN KEY - identifica unicamente uma linha em outra tabela
+CHECK - força uma condição especifica em uma coluna
+DEFAULT - força um valor padrão quando nenhum valor é passado
+
+
+CREATE TABLE Canal (
+CanalId int Primary Key,
+Nome varchar (150) Not Null,
+ContagemInscritos int Default 0,
+DataCriacao datetime Not Null
+)
+
+CREATE TABLE Video (
+VideoId int Primary Key,
+Nome varchar(150) Not Null,
+Visualizacoes int Default 0,
+Likes int Default 0,
+Dislikes int Default 0,
+Duracao int Not Null,
+CanalId int Foreign Key References Canal(CanalId)
+)
+
+-- Insert Into
+
+INSERT INTO nomeDaTabela(coluna1, coluna2, ...)
+VALUES (valor1, valor2, ...)
+
+INSERT INTO TabelaA (coluna1)
+SELECT coluna2
+FROM TabelaB
+
+INSERT INTO aula(id,nome)
+VALUES(1, 'aula 1')
+
+INSERT INTO aula(id,nome)
+VALUES
+(2, 'aula 2'),
+(3, 'aula 3'),
+(4, 'aula 4'),
+(5, 'aula 5')
+
+
+SELECT * INTO novatabela from aula
+
+
+-- Update
+
+UPDATE nomeTabela 
+SET coluna1 = valor1
+    coluna2 = valor2
+WHERE condição
+
+UPDATE aula
+SET nome = 'teste' /* Altera tudo */
+
+UPDATE aula
+SET nome = 'mudanca'
+WHERE id = 3  /* Altera uma linha especifica */
+
+-- Delete
+
+DELETE FROM nomeTabela
+WHERE condição
+
+SELECT * FROM aula
+
+DELETE FROM aula
+WHERE nome = 'mudanca'
+
+
+
 
 
 
